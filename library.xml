@@ -25,7 +25,7 @@
 				<UIText name="TextRowCat" width="230" height="PARENT_HEIGHT" prototype="true" align="center" valign="middle" />
 
 				<UIButton name="ButtonRowCat" width="230" height="PARENT_HEIGHT" prototype="true"
-						OnLeftClick=UIObject_Misc_ExecuteServerScript("gui_library","Refresh",listboxtext:ListBoxCats.TextRowCat)>
+						OnLeftClick=UIObject_Misc_ExecuteServerScript("gui_library","UpdateBooks",listboxtext:ListBoxCats.TextRowCat)>
 					<UIFrame state=up		 fill="b_lg_normal.tga" />
 					<UIFrame state=down		 fill="b_lgr_pressed.tga" />
 					<UIFrame state=focused	 fill="b_lg_hover.tga" />
@@ -45,12 +45,14 @@
 		<UIListbox name="ListBoxBooks" x="5" y="138" width="240" height="180" capturemouseclicks="false" showpartialchild="true" unequalcontrols="false" scrollsegmentsize="1" update="true" hidescrollbarwhennotneeded="false" selectonleftclick="true">
 
 			<UIPane name="PaneRowBook" x="5" width="240" height="30" tupple="true" prototype="true" draggable="false">
-                <UIIcon name="IconRowBook" prototype="true" x="1" y="1" width=28 height=28/>
+				<UIIcon name="IconRowBookNew" color="red" prototype="true" x="10" y="10" width=20 height=20/>
+				<UIIcon name="IconRowBook" prototype="true" width="30" height="30"/>
 
 				<UIText name="TextRowBookTitle" x="30" y="0" width="210" height="PARENT_HEIGHT" prototype="true" align="center" valign="middle" />
 				<UIText name="TextRowBookCode" prototype="true" hidden="true"/>
 
-				<UIButton name="ButtonBook" width="230" height="PARENT_HEIGHT" prototype="true">
+				<UIButton name="ButtonBook" width="230" height="PARENT_HEIGHT" prototype="true"
+						OnLeftClick=UIObject_Misc_ExecuteServerScript("gui_library","SelectBook",listboxtext:ListBoxBooks.TextRowBookCode)>
 					<UIFrame state=up		 fill="b_g_lg04_normal.tga" />
 					<UIFrame state=down		 fill="b_g_lg04_pressed.tga" />
 					<UIFrame state=focused	 fill="b_g_lg04_hover.tga" />

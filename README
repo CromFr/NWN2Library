@@ -32,11 +32,10 @@
 ==================> Installation
 
 NWN :
-	- Importer script.erf (contient gui_library.nss)
-	- Assigner un script OnUsed sur le plaçable à cliquer pour consulter les
-		livres qui ouvrira la GUI grâce à ce bout de code :
-		    DisplayGuiScreen(oPC, "SCREEN_LIBRARY", FALSE, "library.xml", TRUE);
-
+	- Importer script.erf (contient gui_library.nss, library_inc.nss et
+		library_onused.nss)
+	- Assigner 'library_onused' au script OnUsed du le plaçable à cliquer pour
+		consulter les livres.
 	- Placer le fichier "library.xml" dans le dossier documents/nwn2/ui/custom
 	- Si il y a déja un fichier "ingamegui.ini", ajouter la ligne suivante à la
 		fin	de [MandatoryGUI] :
@@ -50,15 +49,18 @@ MySQL :
 	Script de création de la table MySQL :
 			CREATE TABLE `library` (
 			  `code` varchar(45) NOT NULL,
-			  `icon` int(8) default '229',
+			  `date` timestamp NOT NULL default CURRENT_TIMESTAMP,
+			  `price` int(6) default '10',
+			  `icon` int(11) default '229',
 			  `cat` varchar(45) default 'Autres',
 			  `source` varchar(45) default '',
 			  `author` varchar(45) default '',
 			  `title` varchar(100) NOT NULL,
 			  `text` varchar(10000) NOT NULL,
-			  PRIMARY KEY  (`code`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+			  PRIMARY KEY  (`code`)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
-	Note : executez le script example.sql pour remplir un peu la table ;)
+	Note : executez le script BooksFR.sql pour remplir un peu la table ;)
 
 
 		

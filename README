@@ -1,0 +1,90 @@
+================================================================================
+=================== Bibliothèque avec stockage MySQL ===========================
+=========================================================================> Crom
+
+
+==================> Fonctionnement
+
+- Le joueur peut soit lire le livre, soit l'acheter.
+
+- Les livres sont filtrés par catégorie et ordonnés par ordre alphabétique
+
+- Les livres sont dématerialisés : pas besoin de toucher aux blueprints.
+	Lors de l'achat du livre, on créé un livre par défaut puis le modifie avec
+	les infos de la bdd (nom, icône et description).
+
+- Tous les livres sont stockés dans la Bdd avec :
+		code : (identifiant unique & obligatoire) qui determine le tag du livre
+		icon : Num de l'icône du livre (voir notes). Pas obligatoire
+		cat : nom de la catégorie du livre (exemple : Bestiaire, Module, ...)
+		source : Source du livre (HRP) (wikipedia, Gemmaline, ...).
+				Si ='', n'apparaîtra pas dans le livre
+		author : Auteur RP du livre (Elminster, Volo, ...)
+				Si ='', n'apparaîtra pas dans le livre
+		title : Titre du livre
+		text : contenu du livre, jusqu'à 10000 caractères
+	
+
+
+
+
+
+==================> Installation
+
+NWN :
+	- Importer script.erf (contient gui_library.nss)
+	- Assigner un script OnUsed sur le plaçable à cliquer pour consulter les
+		livres qui ouvrira la GUI grâce à ce bout de code :
+		    DisplayGuiScreen(oPC, "SCREEN_LIBRARY", FALSE, "library.xml", TRUE);
+
+	- Placer le fichier "library.xml" dans le dossier documents/nwn2/ui/custom
+	- Si il y a déja un fichier "ingamegui.ini", ajouter la ligne suivante à la
+		fin	de [MandatoryGUI] :
+		    SCREEN_LIBRARY=library.xml
+		sinon ajouter le fichier "ingamegui.ini" présent sur le svn
+
+
+MySQL :
+	L'utilisation de la bibliothèque nécessite évidemment une connexion à une bdd
+	MySQL !
+	Script de création de la table MySQL :
+			CREATE TABLE `library` (
+			  `code` varchar(45) NOT NULL,
+			  `icon` int(8) default '229',
+			  `cat` varchar(45) default 'Autres',
+			  `source` varchar(45) default '',
+			  `author` varchar(45) default '',
+			  `title` varchar(100) NOT NULL,
+			  `text` varchar(10000) NOT NULL,
+			  PRIMARY KEY  (`code`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+	Note : executez le script example.sql pour remplir un peu la table ;)
+
+
+		
+		
+		
+		
+		
+==================> Notes
+ 
+Exemples ID icone - nom icone
+
+	 183 : it_qi_golembook
+	 223 : it_expensivebook
+	 224 : it_lockedbook01
+	 225 : it_lockedbook02
+	 226 : it_elfbook
+	 227 : it_demonbook
+	 228 : it_plainbook01
+	 229 : it_plainbook02
+	 230 : it_plainbook03
+	 231 : it_fancyrecipebook
+	 232 : it_recipebook01
+	 233 : it_recipebook02
+	 1204 : it_qi_bookjustdesserts
+	 1221 : it_qi_numberbook
+	Et bien d'autres dans la table nwn2_icons.2da
+		
+
+

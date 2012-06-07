@@ -42,7 +42,7 @@
 
 		<UIText name="TextBook" text="Livres" color="black" x="5" y="120" width="240" height="15" prototype="true" align="center" valign="middle" maxlines="2" multiline="true"/>
         
-		<UIListbox name="ListBoxBooks" x="5" y="138" width="240" height="180" capturemouseclicks="false" showpartialchild="true" unequalcontrols="false" scrollsegmentsize="1" update="true" hidescrollbarwhennotneeded="false" selectonleftclick="true">
+		<UIListbox name="ListBoxBooks" x="5" y="138" width="240" height="180" capturemouseclicks="false" showpartialchild="false" unequalcontrols="false" scrollsegmentsize="1" update="true" hidescrollbarwhennotneeded="false" selectonleftclick="true">
 
 			<UIPane name="PaneRowBook" x="5" width="240" height="30" tupple="true" prototype="true" draggable="false">
 				<UIIcon name="IconRowBookNew" color="red" prototype="true" x="10" y="10" width=20 height=20/>

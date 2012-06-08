@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <UIScene name="bibliotheque" x=ALIGN_CENTER y=ALIGN_CENTER width=281 height=388 draggable="true" fadein="0.1" fadeout="0.1" scriptloadable=true priority="SCENE_SCRIPT" backoutkey="true"
-	OnAdd=UIObject_Misc_ExecuteServerScript("gui_library","Init")/>
+	OnAdd=UIObject_Misc_ExecuteServerScript("gui_library","Init",local:20)/>
 
 
 <!-- MAIN =================================================================================================================================================-->
@@ -25,7 +25,7 @@
 				<UIText name="TextRowCat" width="230" height="PARENT_HEIGHT" prototype="true" align="center" valign="middle" />
 
 				<UIButton name="ButtonRowCat" width="230" height="PARENT_HEIGHT" prototype="true"
-						OnLeftClick=UIObject_Misc_ExecuteServerScript("gui_library","UpdateBooks",listboxtext:ListBoxCats.TextRowCat)>
+						OnLeftClick=UIObject_Misc_ExecuteServerScript("gui_library","UpdateBooks",local:20,listboxtext:ListBoxCats.TextRowCat)>
 					<UIFrame state=up		 fill="b_lg_normal.tga" />
 					<UIFrame state=down		 fill="b_lgr_pressed.tga" />
 					<UIFrame state=focused	 fill="b_lg_hover.tga" />
@@ -52,7 +52,7 @@
 				<UIText name="TextRowBookCode" prototype="true" hidden="true"/>
 
 				<UIButton name="ButtonBook" width="230" height="PARENT_HEIGHT" prototype="true"
-						OnLeftClick=UIObject_Misc_ExecuteServerScript("gui_library","SelectBook",listboxtext:ListBoxBooks.TextRowBookCode)>
+						OnLeftClick=UIObject_Misc_ExecuteServerScript("gui_library","SelectBook",local:20,listboxtext:ListBoxBooks.TextRowBookCode)>
 					<UIFrame state=up		 fill="b_g_lg04_normal.tga" />
 					<UIFrame state=down		 fill="b_g_lg04_pressed.tga" />
 					<UIFrame state=focused	 fill="b_g_lg04_hover.tga" />
@@ -72,7 +72,7 @@
         <UIPane name="PaneBoutonRead" x="5" y="325" width="115" height="20" capturemouseclicks="false">
 			<UIText name="TextRead" text="Lire" width="PARENT_WIDTH" height="PARENT_HEIGHT" align="center" valign="middle" fontfamily="Default" style="1"/>
 			<UIButton name="BoutonRead" width="PARENT_WIDTH" height="PARENT_HEIGHT" style="STYLE_SMALL_BUTTON"
-					OnLeftClick=UIObject_Misc_ExecuteServerScript("gui_library","Read",listboxtext:ListBoxBooks.TextRowBookCode)>
+					OnLeftClick=UIObject_Misc_ExecuteServerScript("gui_library","Read",local:20,listboxtext:ListBoxBooks.TextRowBookCode)>
 				<UIFrame state=hilited	fill="b_lg_normal.tga" />
 				<UIFrame state=hifocus	fill="b_lg_normal.tga" />
 			</UIButton>
@@ -81,7 +81,7 @@
         <UIPane name="PaneBoutonBuy" x="130" y="325" width="115" height="20" capturemouseclicks="false">
 			<UIText name="TextBuy" text="Acheter (10po)" width="PARENT_WIDTH" height="PARENT_HEIGHT" align="center" valign="middle" fontfamily="Default" style="1"/>
 			<UIButton name="BoutonBuy" width="PARENT_WIDTH" height="PARENT_HEIGHT" style="STYLE_SMALL_BUTTON"
-					OnLeftClick=UIObject_Misc_ExecuteServerScript("gui_library","Buy",listboxtext:ListBoxBooks.TextRowBookCode)>
+					OnLeftClick=UIObject_Misc_ExecuteServerScript("gui_library","Buy",local:20,listboxtext:ListBoxBooks.TextRowBookCode)>
 				<UIFrame state=hilited	fill="b_lg_normal.tga" />
 				<UIFrame state=hifocus	fill="b_lg_normal.tga" />
 			</UIButton>

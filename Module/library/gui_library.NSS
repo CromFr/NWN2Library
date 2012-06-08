@@ -11,8 +11,9 @@
 string MakeBookDescription(string sText, string sAuthor, string sSource);
 
 
+
 //--------------------------------------------------------------------------------
-void main(string sAction, string arg0)
+void main(string sAction, string sTag, string arg0)
 {
 	object oPC = OBJECT_SELF;
 	
@@ -31,7 +32,7 @@ void main(string sAction, string arg0)
 		//- Add 'All' row
 		AddListBoxRow(oPC, GUI_SCREEN, "ListBoxCats", "", "TextRowCat="+TEXT_ALL, "", "", "");
 		//- Add the other rows
-		SQLExecDirect("SELECT `cat` FROM `library` GROUP BY `cat` ORDER BY `cat` ASC");
+		SQLExecDirect("SELECT `cat` FROM `library` WHERE (`libtag`='*' OR FIND_IN_SET('"+sTag+"',`libtag`)) GROUP BY `cat` ORDER BY `cat` ASC");
 		while(SQLFetch())
 		{
 			AddListBoxRow(oPC, GUI_SCREEN, "ListBoxCats", "", "TextRowCat="+SQLGetData(1), "", "", "");
@@ -56,8 +57,11 @@ void main(string sAction, string arg0)
 			sWhere = "1";
 		else
 			sWhere = "`cat`='"+sCat+"'";
+			
 		
-		SQLExecDirect("SELECT `code`,`title`,`icon`,ADDTIME(`date`, '7 0:0:0')>=NOW() FROM `library` WHERE "+sWhere+" ORDER BY `title` ASC");
+		sWhere += " AND (`libtag`='*' OR FIND_IN_SET('"+sTag+"',`libtag`))";
+		
+		SQLExecDirect("SELECT `code`,`title`,`icon`,ADDTIME(`date`, '"+STR_NEW_FLAG_DURATION+" 0:0:0')>=NOW() FROM `library` WHERE "+sWhere+" ORDER BY `title` ASC");
 		
 		while(SQLFetch())
 		{

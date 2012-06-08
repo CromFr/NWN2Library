@@ -10,19 +10,29 @@
 - Les livres sont filtrés par catégorie et ordonnés par ordre alphabétique
 
 - Les livres sont dématerialisés : pas besoin de toucher aux blueprints.
-	Lors de l'achat du livre, on créé un livre par défaut puis le modifie avec
-	les infos de la bdd (nom, icône et description).
+	Les livres sont créés depuis un modèle de base qui est modifié avec les
+	données de la BDD
+
+- Il peut y avoir plusieurs bibliothèques avec différents livres dedans
+
+- Les livres récemment ajoutés ont un "N" dessus (pour New ;) )
 
 - Tous les livres sont stockés dans la Bdd avec :
-		code : (identifiant unique & obligatoire) qui determine le tag du livre
-		icon : Num de l'icône du livre (voir notes). Pas obligatoire
-		cat : nom de la catégorie du livre (exemple : Bestiaire, Module, ...)
-		source : Source du livre (HRP) (wikipedia, Gemmaline, ...).
-				Si ='', n'apparaîtra pas dans le livre
-		author : Auteur RP du livre (Elminster, Volo, ...)
-				Si ='', n'apparaîtra pas dans le livre
-		title : Titre du livre
-		text : contenu du livre, jusqu'à 10000 caractères
+	code : (identifiant unique & obligatoire) qui determine le tag du livre
+	date : Date de l'ajout du livre
+	libtag : Tag des bibliothèques possèdant le livre.
+			Plusieurs tags peuvent être donnés, et doivent être séparés par ","
+			Pour metre le livre ds toutes les bibliothèques, mettre "*"
+	price : Prix de vente du livre en Po
+	icon : Num de l'icône du livre (voir notes). Pas obligatoire
+	cat : nom de la catégorie du livre (exemple : Bestiaire, Module, ...)
+	source : Source du livre (HRP) (wikipedia, Gemmaline, ...).
+			Si ='', n'apparaîtra pas dans le livre
+	author : Auteur RP du livre (Elminster, Volo, ...)
+			Si ='', n'apparaîtra pas dans le livre
+	title : Titre du livre
+	text : contenu du livre, jusqu'à 10000 caractères
+	
 	
 
 
@@ -50,6 +60,7 @@ MySQL :
 			CREATE TABLE `library` (
 			  `code` varchar(45) NOT NULL,
 			  `date` timestamp NOT NULL default CURRENT_TIMESTAMP,
+			  `libtag` varchar(45) default '*',
 			  `price` int(6) default '10',
 			  `icon` int(11) default '229',
 			  `cat` varchar(45) default 'Autres',

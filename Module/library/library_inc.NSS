@@ -4,8 +4,8 @@
 //================================================================================
 
 
-//Days to display the "new" icon after the book creation
-const int INT_NEW_FLAG_DURATION = 7;
+//Days to display the "new" icon after the book creation. WARNING : it's a string !
+const string STR_NEW_FLAG_DURATION = "7";
 
 
 

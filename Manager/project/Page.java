@@ -14,6 +14,7 @@ public abstract class Page extends JPanel implements ActionListener, ListSelecti
 	// enlève le warning
 
 	private JLabel lblBrowse;
+	private JScrollPane scrBrowse;
 	private JList listBrowse;
 	private JButton btnEntryAdd;
 	private JButton btnEntryRemove;
@@ -56,7 +57,10 @@ public abstract class Page extends JPanel implements ActionListener, ListSelecti
 		listBrowse = new JList();
 		listBrowse.addListSelectionListener(this);
 		listBrowse.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		this.add(listBrowse);
+		
+		scrBrowse = new JScrollPane(listBrowse, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrBrowse.setBounds(330,210,300,150);
+		this.add(scrBrowse);
 
 		
 		//====================== Paneau de droite
@@ -136,7 +140,7 @@ public abstract class Page extends JPanel implements ActionListener, ListSelecti
 	/// @param top Pixe
 	protected void setListTop(int top)
 	{
-		listBrowse.setBounds(10, top, 300, 387 - top);
+		scrBrowse.setBounds(10, top, 300, 387 - top);
 	}
 
 }

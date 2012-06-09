@@ -112,8 +112,6 @@ public final class Bdd
 	// SELECT FUNCTIONS
 	// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	///Génère une liste contenant les catégories tirées de la BDD
-	/// @return ladite liste
 	public static ArrayList<Book> generateBookList()
 	{
 		if (selfInstance == null || !bConnected)
@@ -154,9 +152,6 @@ public final class Bdd
 	// REMOVE FUNCTIONS
 	// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	///Supprime la catégorie identifiée par son ID
-	/// @warning Supprime aussi tous les group et les question associés via OnDeleteCascade (via MySQL)
-	/// @param sID valeur de la colonne nom de la table categorie de la catégorie à supprimer
 	public static void removeBook(String sID)
 	{
 		if (selfInstance == null)
@@ -182,9 +177,6 @@ public final class Bdd
 	// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 
-	///Modifie la catégorie identifiée par sID
-	/// @param sID valeur de la colonne nom de la table categorie de la catégorie à modifier
-	/// @param sName nouveau nom à attribuer
 	public static void updateBook(String sOriCode, String sCode, String sTagLibs, String sDate, String sIcon, String sPrice, String sCategory, String sAuthor, String sSource, String sTitle, String sTxt)
 	{
 		if (selfInstance == null)
@@ -220,8 +212,6 @@ public final class Bdd
 	// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 
-	///Ajoute une catégorie par défaut
-	/// @note le nom de la catégorie est 'Nouvelle cat.'
 	public static void insertDefaultBookRow()
 	{
 		if (selfInstance == null)

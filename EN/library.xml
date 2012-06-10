@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<UIScene name="bibliotheque" x=ALIGN_CENTER y=ALIGN_CENTER width=281 height=388 draggable="true" fadein="0.1" fadeout="0.1" scriptloadable=true priority="SCENE_SCRIPT" backoutkey="true"
+	OnAdd=UIObject_Misc_ExecuteServerScript("gui_library","Init",local:20)/>
+
+
+<!-- MAIN =================================================================================================================================================-->
+
+<UIPane name="FenetrePrincipale" width="281" height="388" capturemouseclicks="false" draggable="false">
+
+    <!-- Le bouton pour fermer la fenêtre : -->
+
+	<UIButton name="CloseButton" x=ALIGN_RIGHT y=ALIGN_TOP width=18 height=18 style="STYLE_CLOSE_BUTTON"
+			OnLeftClick=UIButton_Input_ScreenClose()/>
+
+	<UIPane name="FenetrePrincipaleSansBords" x=15 y=23 width=250 height=350 capturemouseclicks="false" draggable="false">
+
+
+
+        <UIText name="TextCat" text="Filters" color="black" x="5" y="5" width="240" height="15" prototype="true" align="center" valign="middle"/>
+
+		<UIListbox name="ListBoxCats" x="5" y="23" width="240" height="80" capturemouseclicks="false" showpartialchild="false" unequalcontrols="false" scrollsegmentsize="1" update="true" hidescrollbarwhennotneeded="false" selectonleftclick="true">
+            
+			<UIPane name="PaneRowCat" x="5" width="240" height="20" tupple="true" prototype="true" draggable="false">
+				<UIText name="TextRowCat" width="230" height="PARENT_HEIGHT" prototype="true" align="center" valign="middle" />
+
+				<UIButton name="ButtonRowCat" width="230" height="PARENT_HEIGHT" prototype="true"
+						OnLeftClick=UIObject_Misc_ExecuteServerScript("gui_library","UpdateBooks",local:20,listboxtext:ListBoxCats.TextRowCat)>
+					<UIFrame state=up		 fill="b_lg_normal.tga" />
+					<UIFrame state=down		 fill="b_lgr_pressed.tga" />
+					<UIFrame state=focused	 fill="b_lg_hover.tga" />
+					<UIFrame state=hilited	 fill="b_lg_normal.tga" />
+					<UIFrame state=hifocus 	 fill="b_lg_normal.tga" />
+				</UIButton>
+			</UIPane>
+
+			<UIScrollBar name="ScrollBarCats" style="STYLE_SB_ULTRA_THIN" />
+		</UIListbox>
+		<UIFrame x="2" y="20" width="246" height="86" alpha="0.8" topleft="tp_frame_tl.tga" topright="tp_frame_tr.tga" bottomleft="tp_frame_bl.tga" bottomright="tp_frame_BR.tga" top="tp_frame_t.tga" bottom="tp_frame_b.tga" left="tp_frame_l.tga" right="tp_frame_r.tga" fillstyle="stretch" fill="tp_frame_bg.tga" border=5/>
+
+
+
+		<UIText name="TextBook" text="Books" color="black" x="5" y="120" width="240" height="15" prototype="true" align="center" valign="middle" maxlines="2" multiline="true"/>
+        
+		<UIListbox name="ListBoxBooks" x="5" y="138" width="240" height="180" capturemouseclicks="false" showpartialchild="false" unequalcontrols="false" scrollsegmentsize="1" update="true" hidescrollbarwhennotneeded="false" selectonleftclick="true">
+
+			<UIPane name="PaneRowBook" x="5" width="240" height="30" tupple="true" prototype="true" draggable="false">
+				<UIIcon name="IconRowBookNew" color="red" prototype="true" x="10" y="10" width=20 height=20/>
+				<UIIcon name="IconRowBook" prototype="true" width="30" height="30"/>
+
+				<UIText name="TextRowBookTitle" x="30" y="0" width="210" height="PARENT_HEIGHT" prototype="true" align="center" valign="middle" />
+				<UIText name="TextRowBookCode" prototype="true" hidden="true"/>
+
+				<UIButton name="ButtonBook" width="230" height="PARENT_HEIGHT" prototype="true"
+						OnLeftClick=UIObject_Misc_ExecuteServerScript("gui_library","SelectBook",local:20,listboxtext:ListBoxBooks.TextRowBookCode)>
+					<UIFrame state=up		 fill="b_g_lg04_normal.tga" />
+					<UIFrame state=down		 fill="b_g_lg04_pressed.tga" />
+					<UIFrame state=focused	 fill="b_g_lg04_hover.tga" />
+					<UIFrame state=hilited	 fill="b_g_lg04_pressed.tga" />
+					<UIFrame state=hifocus 	 fill="b_g_lg04_pressed.tga" />
+				</UIButton>
+			</UIPane>
+
+			<UIScrollBar name="ScrollBarBooks" style="STYLE_SB_ULTRA_THIN" />
+		</UIListbox>
+		<UIFrame x="2" y="135" width="246" height="186" alpha="0.8" topleft="tp_frame_tl.tga" topright="tp_frame_tr.tga" bottomleft="tp_frame_bl.tga" bottomright="tp_frame_BR.tga" top="tp_frame_t.tga" bottom="tp_frame_b.tga" left="tp_frame_l.tga" right="tp_frame_r.tga" fillstyle="stretch" fill="tp_frame_bg.tga" border=5/>
+
+
+
+
+
+        <UIPane name="PaneBoutonRead" x="5" y="325" width="115" height="20" capturemouseclicks="false">
+			<UIText name="TextRead" text="Read" width="PARENT_WIDTH" height="PARENT_HEIGHT" align="center" valign="middle" fontfamily="Default" style="1"/>
+			<UIButton name="BoutonRead" width="PARENT_WIDTH" height="PARENT_HEIGHT" style="STYLE_SMALL_BUTTON"
+					OnLeftClick=UIObject_Misc_ExecuteServerScript("gui_library","Read",local:20,listboxtext:ListBoxBooks.TextRowBookCode)>
+				<UIFrame state=hilited	fill="b_lg_normal.tga" />
+				<UIFrame state=hifocus	fill="b_lg_normal.tga" />
+			</UIButton>
+		</UIPane>
+
+        <UIPane name="PaneBoutonBuy" x="130" y="325" width="115" height="20" capturemouseclicks="false">
+			<UIText name="TextBuy" text="Buy (10gp)" width="PARENT_WIDTH" height="PARENT_HEIGHT" align="center" valign="middle" fontfamily="Default" style="1"/>
+			<UIButton name="BoutonBuy" width="PARENT_WIDTH" height="PARENT_HEIGHT" style="STYLE_SMALL_BUTTON"
+					OnLeftClick=UIObject_Misc_ExecuteServerScript("gui_library","Buy",local:20,listboxtext:ListBoxBooks.TextRowBookCode)>
+				<UIFrame state=hilited	fill="b_lg_normal.tga" />
+				<UIFrame state=hifocus	fill="b_lg_normal.tga" />
+			</UIButton>
+		</UIPane>
+		
+
+
+
+
+
+
+		<UIFrame width="PARENT_WIDTH" height="PARENT_HEIGHT" fill="idesc_paper_bg.tga" fillstyle="stretch"/>
+	</UIPane>
+
+	<UIFrame width="PARENT_WIDTH" height="PARENT_HEIGHT" topleft="frame_main_d_TL.tga" topright="frame_main_t_TR.tga" bottomleft="frame_main_d_BL.tga" bottomright="frame_main_d_BR.tga" top="frame_main_T.tga" bottom="frame_main_B.tga" left="frame_main_L.tga" right="frame_main_R.tga" border="45"/>
+</UIPane>

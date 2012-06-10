@@ -1,37 +1,38 @@
 ================================================================================
-=================== Bibliothèque avec stockage MySQL ===========================
+========================= Library using MySQL ==================================
 =========================================================================> Crom
 
 
-==================> Fonctionnement
+==================> How does it work?
 
-- Le joueur peut soit lire le livre, soit l'acheter.
+- The player can read or buy books
 
-- Les livres sont filtrés par catégorie et ordonnés par ordre alphabétique
+- Books are filtered by category end ordered by title
 
-- Les livres sont dématerialisés : pas besoin de toucher aux blueprints.
-	Les livres sont créés depuis un modèle de base qui est modifié avec les
-	données de la BDD
+- Books are dematerialized : no custom blueprints are needed
+	Books are created with a base blueprint and modified with the information
+	in the database
 
-- Il peut y avoir plusieurs bibliothèques avec différents livres dedans
+- You can have multiple libraries containing different books
 
-- Les livres récemment ajoutés ont un "N" dessus (pour New ;) )
+- Recently added books are marked with a N (stands for New)
 
-- Tous les livres sont stockés dans la Bdd avec :
-	code : (identifiant unique & obligatoire) qui determine le tag du livre
-	date : Date de l'ajout du livre
-	libtag : Tag des bibliothèques possèdant le livre.
-			Plusieurs tags peuvent être donnés, et doivent être séparés par ","
-			Pour metre le livre ds toutes les bibliothèques, mettre "*"
-	price : Prix de vente du livre en Po
-	icon : Num de l'icône du livre (voir notes). Pas obligatoire
-	cat : nom de la catégorie du livre (exemple : Bestiaire, Module, ...)
-	source : Source du livre (HRP) (wikipedia, Gemmaline, ...).
-			Si ='', n'apparaîtra pas dans le livre
-	author : Auteur RP du livre (Elminster, Volo, ...)
-			Si ='', n'apparaîtra pas dans le livre
-	title : Titre du livre
-	text : contenu du livre, jusqu'à 10000 caractères
+- Books are stored in the db with :
+	code : (unique & mandatory) used for the book blueprint ans as the book
+			identifier
+	date : Date when the book has been added
+	libtag : libraries tags that possess the book
+			multiple tags are separated with a comma ","
+			To display a book in all libraries, enter "*"
+	price : Cost of the book
+	icon : Number of the icon (see notes). Optional
+	cat : Category name of the book (ex : Monsters, Module, ...)
+	source : Source of the book (HRP) (Wikipedia, Gemmaline, ...).
+			if ='', will not be shown in the book
+	author : Writer of the book (RP) (ex : Elminster, Volo, ...)
+			if ='', will not be shown in the book
+	title : Book's title
+	text : Book's content, up to 10000 char
 	
 	
 
@@ -42,28 +43,27 @@
 ==================> Installation
 
 NWN :
-	- Importer script.erf (contient gui_library.nss, library_inc.nss et
-		library_onused.nss)
-	- Assigner 'library_onused' au script OnUsed du le plaçable à cliquer pour
-		consulter les livres.
-	- Placer le fichier "library.xml" dans le dossier documents/nwn2/ui/custom
-	- Si il y a déja un fichier "ingamegui.ini", ajouter la ligne suivante à la
-		fin	de [MandatoryGUI] :
+	- Import Scripts.erf (contains gui_library.nss and library_onused.nss)
+	- Import [LANGUAGE]/Scripts.erf (contains library_inc.nss)
+	- Assign 'library_onused' to the OnUsed script of the placeable to click to
+		browse the books (and remember the placeable tag ;))
+	- Put [LANGUE]/library.xml into the folder documents/nwn2/ui/custom
+	- If there is already a file named "ingamegui.ini" in documents/nwn2/ui/custom,
+		add the folowing line at the end of [MandatoryGUI] :
 		    SCREEN_LIBRARY=library.xml
-		sinon ajouter le fichier "ingamegui.ini" présent sur le svn
+		else add the "ingamegui.ini" from the svn into documents/nwn2/ui/custom
 
 
 MySQL :
-	L'utilisation de la bibliothèque nécessite évidemment une connexion à une bdd
-	MySQL !
-	Script de création de la table MySQL :
+	using the library require a nwnx4 server and a SQL database & table ;)
+	To create the needed table, execute this request :
 			CREATE TABLE `library` (
 			  `code` varchar(45) NOT NULL,
 			  `date` timestamp NOT NULL default CURRENT_TIMESTAMP,
 			  `libtag` varchar(45) default '*',
 			  `price` int(6) default '10',
 			  `icon` int(11) default '229',
-			  `cat` varchar(45) default 'Autres',
+			  `cat` varchar(45) default 'Other',
 			  `source` varchar(45) default '',
 			  `author` varchar(45) default '',
 			  `title` varchar(100) NOT NULL,
@@ -71,7 +71,8 @@ MySQL :
 			  PRIMARY KEY  (`code`)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
-	Note : executez le script BooksFR.sql pour remplir un peu la table ;)
+	Note : You can execute the script in [LANGUAGE]/Books.sql to add some sample
+			books
 
 
 		
@@ -81,7 +82,7 @@ MySQL :
 		
 ==================> Notes
  
-Exemples ID icone - nom icone
+ID icon - icon name examples
 
 	 183 : it_qi_golembook
 	 223 : it_expensivebook
@@ -97,7 +98,7 @@ Exemples ID icone - nom icone
 	 233 : it_recipebook02
 	 1204 : it_qi_bookjustdesserts
 	 1221 : it_qi_numberbook
-	Et bien d'autres dans la table nwn2_icons.2da
+	And many others with nwn2_icons.2da
 		
 
 

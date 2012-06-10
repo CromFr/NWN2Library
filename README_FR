@@ -1,0 +1,104 @@
+================================================================================
+=================== Bibliothèque avec stockage MySQL ===========================
+=========================================================================> Crom
+
+
+==================> Fonctionnement
+
+- Le joueur peut soit lire le livre, soit l'acheter.
+
+- Les livres sont filtrés par catégorie et ordonnés par ordre alphabétique
+
+- Les livres sont dématerialisés : pas besoin de toucher aux blueprints.
+	Les livres sont créés depuis un modèle de base qui est modifié avec les
+	données de la BDD
+
+- Il peut y avoir plusieurs bibliothèques avec différents livres dedans
+
+- Les livres récemment ajoutés ont un "N" dessus (pour New ;) )
+
+- Tous les livres sont stockés dans la Bdd avec :
+	code : (identifiant unique & obligatoire) qui determine le tag du livre
+	date : Date de l'ajout du livre
+	libtag : Tag des bibliothèques possèdant le livre.
+			Plusieurs tags peuvent être donnés, et doivent être séparés par ","
+			Pour metre le livre ds toutes les bibliothèques, mettre "*"
+	price : Prix de vente du livre en Po
+	icon : Num de l'icône du livre (voir notes). Pas obligatoire
+	cat : nom de la catégorie du livre (exemple : Bestiaire, Module, ...)
+	source : Source du livre (HRP) (wikipedia, Gemmaline, ...).
+			Si ='', n'apparaîtra pas dans le livre
+	author : Auteur RP du livre (Elminster, Volo, ...)
+			Si ='', n'apparaîtra pas dans le livre
+	title : Titre du livre
+	text : contenu du livre, jusqu'à 10000 caractères
+	
+	
+
+
+
+
+
+==================> Installation
+
+NWN :
+	- Importer Scripts.erf (contient gui_library.nss et
+		library_onused.nss)
+	- Importer [LANGUE]/Scripts.erf (contient library_inc.nss)
+	- Assigner 'library_onused' au script OnUsed du plaçable à cliquer pour
+		consulter les livres. (et souvenez vous de son tag)
+	- Placer le fichier [LANGUE]/library.xml dans le dossier documents/nwn2/ui/custom
+	- Si il y a déja un fichier "ingamegui.ini" dans documents/nwn2/ui/custom,
+		ajouter la ligne suivante à la fin de [MandatoryGUI] :
+		    SCREEN_LIBRARY=library.xml
+		sinon ajouter le fichier "ingamegui.ini" présent sur le svn
+
+
+MySQL :
+	L'utilisation de la bibliothèque nécessite évidemment une connexion à une bdd
+	MySQL !
+	Script de création de la table MySQL :
+			CREATE TABLE `library` (
+			  `code` varchar(45) NOT NULL,
+			  `date` timestamp NOT NULL default CURRENT_TIMESTAMP,
+			  `libtag` varchar(45) default '*',
+			  `price` int(6) default '10',
+			  `icon` int(11) default '229',
+			  `cat` varchar(45) default 'Autres',
+			  `source` varchar(45) default '',
+			  `author` varchar(45) default '',
+			  `title` varchar(100) NOT NULL,
+			  `text` varchar(10000) NOT NULL,
+			  PRIMARY KEY  (`code`)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+	Note : executez le script [LANGUE]/Books.sql pour remplir un peu la table ;)
+
+
+		
+		
+		
+		
+		
+==================> Notes
+ 
+Exemples ID icone - nom icone
+
+	 183 : it_qi_golembook
+	 223 : it_expensivebook
+	 224 : it_lockedbook01
+	 225 : it_lockedbook02
+	 226 : it_elfbook
+	 227 : it_demonbook
+	 228 : it_plainbook01
+	 229 : it_plainbook02
+	 230 : it_plainbook03
+	 231 : it_fancyrecipebook
+	 232 : it_recipebook01
+	 233 : it_recipebook02
+	 1204 : it_qi_bookjustdesserts
+	 1221 : it_qi_numberbook
+	Et bien d'autres dans la table nwn2_icons.2da
+		
+
+
